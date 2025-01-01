@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: [
-    'http://localhost:5173',
-    'https://localhost/5000',
+    'foodblogs.surge.sh',
+    'https://assignment11-server-lw0flfa7v.vercel.app',
 
   ],
   credentials: true
@@ -58,9 +58,9 @@ const wishlistCollection = client.db('BlogApplications').collection('wishlist');
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
 
@@ -84,27 +84,6 @@ async function run() {
       }
     });
 
-
-
-
-
-    // wishlist
-    // app.post('/wishlist',verifyToken, async (req, res) => {
-    //   const { userId, blogId } = req.body;
-    //   try {
-    //       // const existingItem = await Wishlist.findOne({ userId, blogId });
-    //       const existingItem = await wishlistCollection.findOne({ userId, blogId }); 
-
-    //       if (existingItem) {
-    //           return res.status(400).json({ message: 'Blog already in wishlist' });
-    //       }
-    //       const newWishlistItem = new Wishlist({ userId, blogId });
-    //       await newWishlistItem.save();
-    //       res.status(200).json({ message: 'Blog added to wishlist' });
-    //   } catch (err) {
-    //       res.status(500).json({ message: 'Server error', error: err.message });
-    //   }
-    // });
 
 
     app.post('/wishlist', async (req, res) => {
@@ -135,29 +114,6 @@ async function run() {
       const result = await wishlistCollection.deleteOne(query);
       res.send(result);
     });
-    // app.delete('/wishlist/:id', async (req, res) => {
-    //   const { id } = req.params; 
-    //   try {
-    //       // const deletedItem = await Wishlist.findByIdAndDelete(id);
-    //       if (!deletedItem) {
-    //           return res.status(404).json({ message: 'Wishlist item not found' });
-    //       }
-    //       res.status(200).json({ message: 'Blog removed from wishlist' });
-    //   } catch (err) {
-    //       res.status(500).json({ message: 'Server error', error: err.message });
-    //   }
-    // });
-
-    // app.get('/wishlist/:userId', async (req, res) => {
-    //   const { userId } = req.params;
-    //   try {
-    //       const wishlist = await Wishlist.find({ userId }).populate('blogId');
-    //       res.status(200).json(wishlist);
-    //   } catch (err) {
-    //       res.status(500).json({ message: 'Server error', error: err.message });
-    //   }
-    // });
-
 
     // for all blogs
     // 
@@ -237,37 +193,6 @@ async function run() {
     });
     
  
-    
-
-
-
-
-
-
-
-
-
-
-    // wishlist
-
-    // app.get('/wishlist', async (req, res) => {
-    //   const blogId = req.query.blogId; // blog take front end newa
-    //   const query = { blogId: blogId }; 
-    //   const result = await wishlistCollection.find(query).toArray();
-    //   res.send(result); 
-
-    // });
-
-
-
-
-    // app.post('/wishlist', verifyToken, async (req, res) => {
-    //   const newComment = {...req.body,wishlist:res.user.email}; 
-    //   const result = await wishlistCollection.insertOne(newComment); 
-    //   res.send(result); 
-
-
-    // });
 
     // comment related apis
 
