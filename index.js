@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: [
-    'foodblogs.surge.sh',
-    'https://assignment11-server-lw0flfa7v.vercel.app',
+    'https://foodblogs.surge.sh',
+    
 
   ],
   credentials: true
@@ -101,7 +101,7 @@ async function run() {
 
     app.get('/wishlist/:email', async (req, res) => {
       const email = req.params.email;
-      const query = { email };
+      const query = {userEmail: email };
       const result = await wishlistCollection.find(query).toArray();
       res.send(result)
     })
